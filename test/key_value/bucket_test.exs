@@ -12,4 +12,12 @@ defmodule KeyValue.BucketTest do
     KeyValue.Bucket.put(bucket, "milk", 3)
     assert KeyValue.Bucket.get(bucket, "milk") == 3
   end
+
+  test "deletes value of key if it exists", %{bucket: bucket} do
+    KeyValue.Bucket.put(bucket, "milk", 3)
+
+    assert KeyValue.Bucket.delete(bucket, "bread") == nil
+    assert KeyValue.Bucket.delete(bucket, "milk") == 3
+    assert KeyValue.Bucket.get(bucket, "milk") == nil
+  end
 end
